@@ -9,7 +9,7 @@ if (!$captcha) {
   echo "Por favor verifica el captcha";
 }
 
-$SECRET_KEY = "6LcD9cQZAAAAAIbqbojvo-gPvAknPcy7dW-dGs86";
+$SECRET_KEY = getenv("RECAPTCHA_SECRET_KEY");
 $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$SECRET_KEY&response=$captcha"));
 
 if ($response->success) {
