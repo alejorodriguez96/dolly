@@ -167,7 +167,8 @@ FormMannager = {
     // Send CSV data
     $.post(Config.submitURL,
     {
-       pio: dataStr
+       pio: dataStr,
+       response: grecaptcha.getResponse() // Esto viene del script de recaptcha agregado
     },
     function(data, status){
        if(status == "success" && data.trim() == dataStr.trim()){
