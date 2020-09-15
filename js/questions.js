@@ -12,9 +12,10 @@ Questions = {
     {id: 5, question: "Intenta que los alumnos participen en las clases", short: "Fomenta la participación en clase"},
     {id: 6, question: "Presenta un panorama amplio de su asignatura"},
     {id: 7, question: "Acepta la crítica fundamentada"},
-    {id: 8, question: "Responde dudas por mail/campus"}
+    {id: 8, question: "Responde dudas por mail/campus"},
+    {id: 9, question: "Preparo bien su asignatura para la cursada virtual", short: "Cursada Virtual"}
   ],
-  activeQuestions: [0,1,2,3,4,5,6,7,8],
+  activeQuestions: [0,1,2,3,4,5,6,7,8,9],
   getQuestions: function(){
     return Questions.questions.filter(q => Questions.activeQuestions.includes(q.id));
   }

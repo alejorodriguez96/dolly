@@ -1,5 +1,5 @@
 import numpy as np
-questions = ["asistencia","cumple_horarios","buen_trato","clase_organizada","claridad","fomenta_participacion","panorama_amplio","acepta_critica","responde_mails"]
+questions = ["asistencia","cumple_horarios","buen_trato","clase_organizada","claridad","fomenta_participacion","panorama_amplio","acepta_critica","responde_mails","cursada_virtual"]
 class Curso:
     def __init__(self,id):
         self.id = id
@@ -80,9 +80,10 @@ class Docente:
             cant = 0
             suma = 0
             for i in self.valoraciones[q]:
+                if (i == 0): continue
                 suma += i
                 cant += 1
-            self.valoraciones[q] = round(suma/cant,2)
+            self.valoraciones[q] = round(suma/cant,2) if cant > 0 else 0
 
 
 class Materia:

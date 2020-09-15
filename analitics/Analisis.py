@@ -23,7 +23,7 @@ out_comentarios =  "comentarios_docentes.json"
 
 # Voy a sanitizar la tabla, por si aparece algun registro con menos campos o texto
 
-questioncols = ['asistencia', 'cumple_horarios', 'buen_trato', 'clase_organizada', 'claridad', 'fomenta_participacion', 'panorama_amplio', 'acepta_critica', 'responde_mails']
+questioncols = ['asistencia', 'cumple_horarios', 'buen_trato', 'clase_organizada', 'claridad', 'fomenta_participacion', 'panorama_amplio', 'acepta_critica', 'responde_mails', 'cursada_virtual']
 usecols = ['doc', 'mat', 'cuat'] + questioncols + ['comentarios']
 
 df_raw = pd.read_csv(datafile, usecols=usecols, header=0)

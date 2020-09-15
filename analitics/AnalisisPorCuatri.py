@@ -27,7 +27,7 @@ def analizar_equivalencias():
     return equivalencias
 
 
-datafile = "../gente.txt"
+datafile = "../gente2.txt"
 script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
 
 def escribir_log(cuatri,mensaje, doc, cuat, mat, linea):

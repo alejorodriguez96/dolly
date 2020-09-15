@@ -26,6 +26,7 @@ Prueba = {
             <span><i class="far fa-comments puntaje fa-fw cambiante" data-toggle="tooltip" data-placement="bottom" title="Fomenta la participación"></i></span>\
             <span><i class="far fa-envelope-open puntaje fa-fw cambiante" data-toggle="tooltip" data-placement="bottom" title="Responde por mail o Campus"></i></span>\
             <span><i class="fas fa-star puntaje fa-fw cambiante" data-toggle="tooltip" data-placement="bottom" title="Presenta un panorama amplio"></i></span>\
+            <span><i class="fas fa-desktop puntaje fa-fw cambiante" data-toggle="tooltip" data-placement="bottom" title="Buena adaptacion a cursada virtual"></i></span>\
           </th>\
         </tr>\
       </thead>\
@@ -61,7 +62,11 @@ Calc = {
     const number_html = "<div class='puntaje-detalle' style='background-color: FONDO; color: black;' data-toggle='tooltip' data-placement='bottom' title='TOOLTIP'>NUMBER</div>";
     let html="";
     res.forEach(function(n,i){
-      html += number_html.replace("FONDO", colors[i]).replace("NUMBER", Calc.roundScoreFix(n)).replace("TOOLTIP", Calc.tooltips[i]);
+      var round = Calc.roundScore(n);
+      if (round == 0){
+        round = "??";
+      }
+      html += number_html.replace("FONDO", colors[i]).replace("NUMBER", round).replace("TOOLTIP", Calc.tooltips[i]);
     });
     return html;
   },
@@ -74,7 +79,8 @@ Calc = {
     "Acepta la crítica fundamentada",
     "Fomenta la participación",
     "Responde por mail o Campus",
-    "Presenta un panorama amplio"
+    "Presenta un panorama amplio",
+    "Buena adaptacion a cursada virtual"
   ],
   pickColor(score){
     var index = Math.floor(Math.abs(score-0.001));
@@ -82,10 +88,15 @@ Calc = {
   },
   score(data){
     let tot = 0;
+    let resta = 0;
     Object.keys(Calc.pesos).forEach(function(k){
+      if (data[k] != 0){
       tot += data[k]*Calc.pesos[k];
+    }else{
+      resta += Calc.pesos[k]
+    }
     });
-    return tot/Calc.sum(Calc.pesos);
+    return tot/(Calc.sum(Calc.pesos) - resta);
   },
   colors:[
     '#ff0000', //:(
@@ -95,15 +106,16 @@ Calc = {
     '#33ff33'  //:D
   ],
   pesos: {
-    'asistencia': 1,
-    'cumple_horarios': 1,
+    'asistencia': .5,
+    'cumple_horarios': .7,
     'clase_organizada': .7,
     'claridad': .7,
     'buen_trato': 0.5,
     'acepta_critica': 0.5,
     'fomenta_participacion': 0.5,
     'responde_mails': 0.5,
-    'panorama_amplio': 0.5
+    'panorama_amplio': 0.5,
+    'cursada_virtual': 1
   },
 
   roundScore: function(x){
